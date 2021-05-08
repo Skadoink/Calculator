@@ -8,6 +8,11 @@ import javax.swing.*;
 public class GUI extends JFrame {
 
     public static void main(String[] args){
+
+        JPanel gbLayout = new JPanel(new GridBagLayout());
+        GridBagConstraints gbConstraints = new GridBagConstraints();
+        
+
         JPanel numPanel = new JPanel();
         numPanel.setLayout(new GridLayout(0, 3, 2, 2));
 
