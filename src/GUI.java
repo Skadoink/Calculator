@@ -8,24 +8,27 @@ import javax.swing.*;
 public class GUI extends JFrame {
 
     public static void main(String[] args){
+        JFrame newFrame = new JFrame("Calculator with gridbag!"); //made window
+        newFrame.setLayout(new GridBagLayout());
+        newFrame.setSize(350, 500);
+        newFrame.setLocationRelativeTo(null);  
+        newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        newFrame.setVisible(true);
 
-        JPanel gbLayout = new JPanel(new GridBagLayout());
-        GridBagConstraints gbConstraints = new GridBagConstraints();
-        
+        GridBagConstraints gbc = new GridBagConstraints();
 
         JPanel numPanel = new JPanel();
         numPanel.setLayout(new GridLayout(0, 3, 2, 2));
-
-        JPanel labPanel = new JPanel();
-        JLabel label = new JLabel("JLabel example!!!"); //test label
-        labPanel.add(label);
-        labPanel.setSize(2, 40);
-
         for(Integer i=1; i < 10; i++){  //add numbers
             JButton digit = new JButton();  
             digit.setText(i.toString()); 
             numPanel.add(digit);
         }
+        gbc.weightx = 0.5;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        newFrame.add(numPanel, gbc);  
 
         JButton zero = new JButton(); //add 0
         zero.setText("0");
@@ -42,16 +45,22 @@ public class GUI extends JFrame {
             operator.setText(operatorList.get(i));
             oppPanel.add(operator);
         }
+        gbc.weightx = 0.5;
+        gbc.fill = GridBagConstraints.EAST;
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+        newFrame.add(oppPanel, gbc);
 
-        JFrame frame = new JFrame("Calculator!"); //made window
-        frame.setLayout(new GridLayout(0, 1));
-        frame.add(numPanel);  
-        frame.add(oppPanel);
-        frame.add(labPanel);
+        JPanel labPanel = new JPanel();
+        JLabel label = new JLabel("JLabel example!!!"); //test label
+        labPanel.add(label);
+        labPanel.setSize(2, 40);
+        gbc.weightx = 0.5;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+        newFrame.add(labPanel, gbc);
 
-        frame.setSize(350, 500);
-        frame.setLocationRelativeTo(null);  
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+
     }
 }
