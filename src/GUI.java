@@ -28,6 +28,8 @@ public class GUI extends JFrame {
         gbc.fill = GridBagConstraints.BOTH;
         gbc.gridx = 0;
         gbc.gridy = 0;
+        gbc.ipady = 60;
+        gbc.weighty = 1;
         newFrame.add(numPanel, gbc);  
 
         JButton zero = new JButton(); //add 0
@@ -39,26 +41,26 @@ public class GUI extends JFrame {
         Collections.addAll(operatorList, "+", "-", "*", "/"); 
         JPanel oppPanel = new JPanel();
         oppPanel.setLayout(new GridLayout(1, 4, 2, 2));
-        oppPanel.setSize(350, 50); //set size not working!
         for(Integer i = 0; i < operatorList.size(); i++){
             JButton operator = new JButton();
             operator.setText(operatorList.get(i));
             oppPanel.add(operator);
         }
-        gbc.weightx = 0.5;
-        gbc.fill = GridBagConstraints.EAST;
-        gbc.gridx = 2;
-        gbc.gridy = 0;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.ipady = 20;
+        gbc.weighty = 0.5;
         newFrame.add(oppPanel, gbc);
 
         JPanel labPanel = new JPanel();
         JLabel label = new JLabel("JLabel example!!!"); //test label
         labPanel.add(label);
         labPanel.setSize(2, 40);
-        gbc.weightx = 0.5;
         gbc.fill = GridBagConstraints.BOTH;
-        gbc.gridx = 2;
-        gbc.gridy = 0;
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.weighty = 0.5;
         newFrame.add(labPanel, gbc);
 
 
