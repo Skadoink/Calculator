@@ -24,18 +24,34 @@ public class GUI extends JFrame {
             digit.setText(i.toString()); 
             numPanel.add(digit);
         }
-        gbc.weightx = 0.5;
         gbc.fill = GridBagConstraints.BOTH;
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.ipady = 60;
-        gbc.weighty = 1;
+        gbc.weighty = 0.5;
+        gbc.weightx = 0.5;
+        gbc.gridheight = 3; //can't make it work at gridheight = 3
+        gbc.gridwidth = 3;
         newFrame.add(numPanel, gbc);  
 
         JButton zero = new JButton(); //add 0
         zero.setText("0");
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        // gbc.weighty = 0.5;
+        gbc.weightx = 0.5;
+        gbc.gridwidth = 1; //often too big
+        gbc.gridheight = 1;
+        newFrame.add(zero, gbc);
+
         JButton execute = new JButton(); //add exe
         execute.setText("EXE");
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        // gbc.weighty = 0.5;
+        gbc.weightx = 1;
+        gbc.gridwidth = 1;  //can't get proportional sizing right atm.
+        gbc.gridheight = 1;
+        newFrame.add(execute, gbc);
 
         ArrayList<String>operatorList = new ArrayList<String>(); //add operators
         Collections.addAll(operatorList, "+", "-", "*", "/"); 
@@ -48,19 +64,22 @@ public class GUI extends JFrame {
         }
         gbc.fill = GridBagConstraints.BOTH;
         gbc.gridx = 0;
-        gbc.gridy = 1;
+        gbc.gridy = 4;
         gbc.ipady = 20;
-        gbc.weighty = 0.5;
+        // gbc.weighty = 0.5;
+        gbc.gridwidth = 3;
+        gbc.gridheight = 1;
         newFrame.add(oppPanel, gbc);
 
         JPanel labPanel = new JPanel();
         JLabel label = new JLabel("JLabel example!!!"); //test label
         labPanel.add(label);
-        labPanel.setSize(2, 40);
         gbc.fill = GridBagConstraints.BOTH;
         gbc.gridx = 0;
-        gbc.gridy = 2;
-        gbc.weighty = 0.5;
+        gbc.gridy = 5;
+        // gbc.weighty = 0.5;
+        // gbc.gridwidth = 5;
+        gbc.gridheight = 1;
         newFrame.add(labPanel, gbc);
 
 
