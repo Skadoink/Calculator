@@ -4,11 +4,15 @@ import java.util.Collections;
 import java.util.Scanner;  // Import the Scanner class
 import java.lang.Math;
 import java.text.ParseException;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.Foc;
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 
-public class GUI extends JFrame {
+public class GUI implements ActionListener, FocusListener{
 
     public static void main(String[] args) throws ParseException{
         JFrame newFrame = new JFrame("Calculator with gridbag!"); //made window
@@ -20,13 +24,48 @@ public class GUI extends JFrame {
 
         GridBagConstraints gbc = new GridBagConstraints();
 
+        MaskFormatter mask = null;
+        try{
+            mask = new MaskFormatter("********************"); //set up formatiing for text field, 20 chars max
+            mask.setValidCharacters("1234567890+-*/");
+            String defText = "Enter calculation";
+            mask.setPlaceholder(defText);
+        }
+        catch (ParseException e){
+            e.printStackTrace();
+        }
+
+        JFormattedTextField display = new JFormattedTextField(mask); //make formatted text field
+        display.addFocusListener(new FocusListener(){
+            public void focusGained(FocusEvent e){
+                display.setText("");
+            }
+            public void focusLost(FocusEvent e) {
+                //nothing
+            }
+        });
+        
+        display.setPreferredSize(new Dimension(210, 20));
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.gridy = 6;
+        gbc.gridx = 0;
+        gbc.gridwidth = 3;
+        gbc.gridheight = 1;
+        newFrame.add(display, gbc);
+
         JPanel numPanel = new JPanel();
         numPanel.setLayout(new GridLayout(0, 3, 2, 2));
         for(Integer i=1; i < 10; i++){  //add numbers
             JButton digit = new JButton();  
-            digit.setText(i.toString()); 
+            String digitStr = i.toString();
+            digit.setText(digitStr); 
             digit.setPreferredSize(new Dimension(70, 70));
             numPanel.add(digit);
+            digit.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent evt){
+                    display.setText(digitStr);
+                }
+            });
         }
         gbc.fill = GridBagConstraints.BOTH;
         gbc.gridx = 0;
@@ -75,25 +114,8 @@ public class GUI extends JFrame {
         gbc.gridheight = 1;
         newFrame.add(oppPanel, gbc);
 
-        MaskFormatter mask = null;
-        try{
-            mask = new MaskFormatter("****************"); //set up formatiing for text field, 16 chars max
-            mask.setValidCharacters("1234567890+-*/");
-            mask.setPlaceholder("test wow");
-        }
-        catch (ParseException e){
-            e.printStackTrace();
-        }
         
-
-        JFormattedTextField display = new JFormattedTextField(mask); //make formatted text field
-        display.setPreferredSize(new Dimension(210, 20));
-        gbc.fill = GridBagConstraints.BOTH;
-        gbc.gridy = 6;
-        gbc.gridx = 0;
-        gbc.gridwidth = 3;
-        gbc.gridheight = 1;
-        newFrame.add(display, gbc);
+       
 
         newFrame.pack();
     }
