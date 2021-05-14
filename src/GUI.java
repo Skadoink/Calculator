@@ -1,4 +1,13 @@
+//need to sort out error checking for:
+//invalid chars, ints over 8 digits, 
+//consider results that are too long
+//to use double
+//link other non-number buttons to the gui
+//write maths in seperate class
+
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.awt.*;
 import java.util.Collections;
 import java.util.Scanner;  // Import the Scanner class
@@ -99,6 +108,11 @@ public class GUI implements ActionListener, FocusListener{
         gbc.gridheight = 1;
         gbc.insets = new Insets(1, 1, 1, 1);
         newFrame.add(zero, gbc);
+        zero.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent evt){
+                addText(display, zero.getText());
+            }
+        });
 
         JButton execute = new JButton(); //add exe
         execute.setText("EXE");
@@ -119,6 +133,14 @@ public class GUI implements ActionListener, FocusListener{
             operator.setText(operatorList.get(i));
             operator.setPreferredSize(new Dimension(52, 40));
             oppPanel.add(operator);
+            if(Arrays.asList("+", "-", "*", "/").contains(operator.getText())){
+                operator.addActionListener(new ActionListener(){
+                    public void actionPerformed(ActionEvent evt){
+                        addText(display, operator.getText());
+                    }
+                });
+            }
+            
         }
         gbc.fill = GridBagConstraints.BOTH;
         gbc.gridx = 0;
