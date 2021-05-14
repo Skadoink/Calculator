@@ -8,11 +8,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.awt.event.Foc;
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 
 public class GUI implements ActionListener, FocusListener{
+
+    static boolean buttonPress;
+
+    static void addText(JTextField display, String digitStr){
+        if(buttonPress){
+            display.setText(display.getText() + digitStr);
+        }
+        else{
+            display.setText(digitStr);
+            buttonPress = true;
+        }
+    }
 
     public static void main(String[] args) throws ParseException{
         JFrame newFrame = new JFrame("Calculator with gridbag!"); //made window
@@ -24,26 +35,28 @@ public class GUI implements ActionListener, FocusListener{
 
         GridBagConstraints gbc = new GridBagConstraints();
 
-        MaskFormatter mask = null;
-        try{
-            mask = new MaskFormatter("********************"); //set up formatiing for text field, 20 chars max
-            mask.setValidCharacters("1234567890+-*/");
-            String defText = "Enter calculation";
-            mask.setPlaceholder(defText);
-        }
-        catch (ParseException e){
-            e.printStackTrace();
-        }
+        // MaskFormatter mask = null;
+        // try{
+        //     mask = new MaskFormatter("********************"); //set up formatiing for text field, 20 chars max
+        //     mask.setValidCharacters("1234567890+-*/");
+        //     String defText = "Enter something";
+        //     mask.setPlaceholder(defText);
+        // }
+        // catch (ParseException e){
+        //     e.printStackTrace();
+        // }
 
-        JFormattedTextField display = new JFormattedTextField(mask); //make formatted text field
-        display.addFocusListener(new FocusListener(){
-            public void focusGained(FocusEvent e){
-                display.setText("");
-            }
-            public void focusLost(FocusEvent e) {
-                //nothing
-            }
-        });
+        // JFormattedTextField display = new JFormattedTextField(mask); //make formatted text field
+        // display.addFocusListener(new FocusListener(){
+        //     public void focusGained(FocusEvent e){
+        //         display.setText("");
+        //     }
+        //     public void focusLost(FocusEvent e) {
+        //         //nothing
+        //     }
+        // });
+
+        JTextField display =  new JTextField();
         
         display.setPreferredSize(new Dimension(210, 20));
         gbc.fill = GridBagConstraints.BOTH;
@@ -63,7 +76,7 @@ public class GUI implements ActionListener, FocusListener{
             numPanel.add(digit);
             digit.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent evt){
-                    display.setText(digitStr);
+                    addText(display, digitStr);
                 }
             });
         }
@@ -119,4 +132,6 @@ public class GUI implements ActionListener, FocusListener{
 
         newFrame.pack();
     }
+
+    
 }
