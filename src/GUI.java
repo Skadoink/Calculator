@@ -123,6 +123,7 @@ public class GUI implements ActionListener, FocusListener{
         gbc.gridwidth = 1; 
         gbc.gridheight = 1;
         newFrame.add(execute, gbc);
+        double result = new Calculate.getAnswer(display.getText());
 
         ArrayList<String>operatorList = new ArrayList<String>(); //add operators
         Collections.addAll(operatorList, "+", "-", "C", "AC", "*", "/", "+/-"); 
@@ -149,8 +150,6 @@ public class GUI implements ActionListener, FocusListener{
         gbc.gridheight = 1;
         newFrame.add(oppPanel, gbc);
 
-        
-       
 
         newFrame.pack();
     }
