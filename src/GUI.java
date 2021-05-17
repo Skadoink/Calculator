@@ -123,7 +123,14 @@ public class GUI implements ActionListener, FocusListener{
         gbc.gridwidth = 1; 
         gbc.gridheight = 1;
         newFrame.add(execute, gbc);
-        double result = new Calculate.getAnswer(display.getText());
+        execute.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent evt){
+                Calculate testVar = new Calculate();
+                double result = testVar.getAnswer(display.getText());
+                display.setText(String.valueOf(result));
+            }
+            // double result = new Calculate.getAnswer(display.getText());
+        });
 
         ArrayList<String>operatorList = new ArrayList<String>(); //add operators
         Collections.addAll(operatorList, "+", "-", "C", "AC", "*", "/", "+/-"); 
